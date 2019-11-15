@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block title %}
+반납 현황
+{% endblock %}
+
+{% block content %}
+
+
+<p></p>
+<div class="col-md-2">
+<p class="text-left">
+    <button type="button" class="btn-xs btn-info" onclick="location.href={% url 'monitoring:mass_board' %}">
+       대량반납 현황 보기
+    </button>
+<!-- 버튼 생성
+    <button type="button" class="btx-sx btn-success">
+        <a href="{% url 'monitoring:loading' %}" class="nav-link">Import</a></li>
+    </button>
+-->
+
+</p>
+</div>
+
+<div id="container"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+
+<div class="col-md-2">
+<script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '반납현황'
+        },
+        xAxis: {
+            categories: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
+        },
+        series: [{
+            name: '반납진행',
+            data: [107, 31, 635, 203, 232,120,203, 332,120,333,111,232]
+        }, {
+            name: '사업계획물량',
+            data: [133, 156, 947, 408, 236,342,222,44,442,234,34,222]
+        }]
+    });
+</script>
+</div>
+
+<div class="col-md-4">
+
+        <form class="form-inline" action="{%url 'monitoring:search' %}">
+            <input class="form-control mr-sm-2" type="search" placeholder="차량번호" aria-label="Search" name="number" value="{{number}}">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+        </form>
+</div>
+
+{% endblock %}
